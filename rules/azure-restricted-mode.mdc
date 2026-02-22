@@ -1,0 +1,23 @@
+---
+description: Enforces restricted mode when azure-cursor.config.json or .cursor/azure-cursor.json exists. Check this before any Azure write operation (create, update, delete).
+alwaysApply: true
+---
+
+# Azure Restricted Mode
+
+Before performing any Azure **write** operation (create, update, delete, deploy), check for a config file:
+
+1. Look for `.cursor/azure-cursor.json` or `azure-cursor.config.json` in the workspace root.
+2. If found and `restrictedMode` is `true`, enforce the following:
+
+**When `scope` is `"readOnly"`**:
+- Allowed: `az login`, `az account show`, `az account list`, `az group list`, `az resource list`, `az bicep build`, `az deployment group validate`, read-only queries.
+- Not allowed: `az group create`, `az group delete`, `az deployment group create`, any `az * create/update/delete`, resource creation/modification.
+
+**When `scope` is `"resourceGroup"`**:
+- All write operations must target the resource group specified in `resourceGroup` only.
+- Reject operations that create resources in other resource groups or delete the configured resource group without explicit user confirmation.
+
+3. If restricted and the user requests a blocked operation, inform them: "Restricted mode is enabled. To allow this operation, set restrictedMode to false in azure-cursor.config.json, or adjust the scope/resourceGroup settings."
+
+4. If no config file exists or `restrictedMode` is `false`, proceed normally.

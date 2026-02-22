@@ -1,0 +1,6 @@
+{
+  "restrictedMode": true,
+  "scope": "readOnly",
+  "resourceGroup": null,
+  "_comment": "Copy to azure-cursor.config.json or .cursor/azure-cursor.json in your project. Set restrictedMode: false to disable restrictions."
+}

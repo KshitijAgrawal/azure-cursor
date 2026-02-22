@@ -1,0 +1,16 @@
+---
+description: Azure security best practices. Use when storing secrets, configuring authentication, or when the user mentions Key Vault, managed identity, or security.
+globs: ["**/*.bicep", "**/azuredeploy*.json", "**/*.ts", "**/*.js", "**/*.py"]
+---
+
+# Azure Security Practices
+
+Based on [Microsoft Azure security best practices](https://learn.microsoft.com/en-us/azure/security/fundamentals/best-practices-and-patterns).
+
+1. **Never hardcode secrets** in code or templates. Use Key Vault and Key Vault references (e.g., `@Microsoft.KeyVault(SecretUri=...)`) in App Service / Function App settings.
+2. **Use Managed Identity** for Azure-to-Azure auth (App Service → Storage, Key Vault) instead of connection strings where supported.
+3. **Use securestring / @secure()** for ARM/Bicep parameters that hold passwords or keys.
+4. **RBAC and least privilege**: Restrict Key Vault access; avoid broad `*` permissions.
+5. **Encryption**: TLS 1.2+ minimum; `supportsHttpsTrafficOnly: true`; `allowBlobPublicAccess: false` on Storage unless required.
+6. **Enable diagnostic logs** (App Service, Key Vault, Storage) and send to Log Analytics.
+7. **Use private endpoints** for Key Vault, Storage, and SQL when handling sensitive data in production.

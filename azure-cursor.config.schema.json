@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Azure Cursor Plugin Config",
+  "description": "Restrict the plugin to read-only or a specific resource group until you feel confident.",
+  "type": "object",
+  "properties": {
+    "restrictedMode": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, enforces scope restrictions. Set to false for full access."
+    },
+    "scope": {
+      "type": "string",
+      "enum": ["readOnly", "resourceGroup"],
+      "description": "readOnly: no create/update/delete. resourceGroup: only allow operations within the specified resource group."
+    },
+    "resourceGroup": {
+      "type": ["string", "null"],
+      "description": "Required when scope is resourceGroup. All write operations must target this resource group only."
+    }
+  },
+  "required": ["restrictedMode"],
+  "additionalProperties": false
+}

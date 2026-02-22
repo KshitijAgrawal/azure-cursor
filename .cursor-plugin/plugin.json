@@ -1,0 +1,33 @@
+{
+  "name": "azure-cursor",
+  "version": "1.0.0",
+  "description": "Azure integration for Cursor: ARM/Bicep templates, Functions, App Service, DevOps, and Azure best practices",
+  "author": {
+    "name": "Azure Cursor Contributors"
+  },
+  "keywords": [
+    "azure",
+    "arm",
+    "bicep",
+    "infrastructure-as-code",
+    "azure-functions",
+    "app-service",
+    "static-web-apps",
+    "devops",
+    "cosmos-db",
+    "storage",
+    "blob",
+    "key-vault",
+    "aks",
+    "kubernetes",
+    "azure-openai",
+    "gpt-4",
+    "llm",
+    "az-login",
+    "azure-cli",
+    "read-only",
+    "restricted-mode",
+    "security-best-practices"
+  ],
+  "license": "MIT"
+}

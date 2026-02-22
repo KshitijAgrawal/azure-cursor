@@ -1,0 +1,20 @@
+---
+description: Azure resource naming conventions. Use when creating or naming Azure resources, resource groups, storage accounts, or when the user asks about Azure naming.
+globs: ["**/*.bicep", "**/azuredeploy*.json", "**/main.bicep"]
+---
+
+# Azure Naming Conventions
+
+Follow Microsoft-recommended naming patterns:
+
+- **Resource groups**: `rg-<workload>-<env>` (e.g., `rg-api-prod`)
+- **Storage accounts**: lowercase, 3-24 chars, no hyphens (e.g., `stmyappprod001`)
+- **App Service / Web App**: `app-<name>-<env>` (e.g., `app-myapi-prod`)
+- **Function App**: `func-<name>-<env>` (e.g., `func-processor-prod`)
+- **Key Vault**: `kv-<name>-<env>` (e.g., `kv-myapp-prod`)
+- **Cosmos DB**: `cosmos-<name>-<env>` (lowercase, 3-44 chars)
+- **SQL Server**: `sql-<name>-<env>`
+- **SQL Database**: `sqldb-<name>-<env>`
+- **App Service Plan**: `asp-<name>-<env>`
+
+Abbreviations: `rg`, `st`, `app`, `func`, `kv`, `cosmos`, `sql`, `asp`. Use `uniqueString(resourceGroup().id)` or similar when global uniqueness is required (e.g., storage accounts).
