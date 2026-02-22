@@ -78,7 +78,8 @@ When working with ARM templates (JSON):
 1. **Modularize**: Split large templates into linked templates or use Bicep modules
 2. **Location**: Prefer `[resourceGroup().location]` for resource locations
 3. **Naming**: Use `uniqueString()` for globally unique names when needed
-4. **Outputs**: Output resource IDs, endpoints, and connection strings for downstream use
+4. **Tags**: Add `created-by-cursor-azure: "true"` and Environment/ManagedBy to all taggable resources
+5. **Outputs**: Output resource IDs, endpoints, and connection strings for downstream use
 
 ## Common Resource Types
 

@@ -12,7 +12,7 @@ When reviewing Azure deployments, IaC, or CI/CD, align with [Azure security best
    - Naming conventions (rg-, app-, func-, kv-, etc.)
    - Use of parameters/variables vs hardcoded values
    - Appropriate SKU/tier for environment
-   - Tags (Environment, ManagedBy, Project)
+   - Tags (Environment, ManagedBy, Project, created-by-cursor-azure: true)
 
 2. **Security**
    - No hardcoded secrets; Key Vault references or secure parameters

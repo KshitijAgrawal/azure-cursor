@@ -1,0 +1,7 @@
+{
+  "restrictedMode": true,
+  "scope": "readOnly",
+  "resourceGroup": null,
+  "restrictDeletesToCreatedByCursorAzure": true,
+  "_comment": "restrictDeletesToCreatedByCursorAzure: when true, only allow deletes inside RGs tagged created-by-cursor-azure=true"
+}

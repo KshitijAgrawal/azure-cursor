@@ -1,5 +1,5 @@
 ---
-description: Enforces restricted mode when azure-cursor.config.json or .cursor/azure-cursor.json exists. Check this before any Azure write operation (create, update, delete).
+description: Enforces restricted mode when azure-cursor-community.config.json or .cursor/azure-cursor-community.json exists. Check this before any Azure write operation (create, update, delete, deploy).
 alwaysApply: true
 ---
 
@@ -7,8 +7,9 @@ alwaysApply: true
 
 Before performing any Azure **write** operation (create, update, delete, deploy), check for a config file:
 
-1. Look for `.cursor/azure-cursor.json` or `azure-cursor.config.json` in the workspace root.
-2. If found and `restrictedMode` is `true`, enforce the following:
+1. Look for `.cursor/azure-cursor-community.json` or `azure-cursor-community.config.json` in the workspace root.
+2. If found and `restrictedMode` is `true`, enforce scope (readOnly or resourceGroup) as below.
+3. **Delete restriction** (independent of restrictedMode): If `restrictDeletesToCreatedByCursorAzure` is `true`, only allow deletes (az group delete, az resource delete, etc.) when the target resource group has tag `created-by-cursor-azure: "true"`. Before deleting, run `az group show --name <rg> --query tags` to verify. Reject deletes for RGs without that tag.
 
 **When `scope` is `"readOnly"`**:
 - Allowed: `az login`, `az account show`, `az account list`, `az group list`, `az resource list`, `az bicep build`, `az deployment group validate`, read-only queries.
@@ -18,6 +19,8 @@ Before performing any Azure **write** operation (create, update, delete, deploy)
 - All write operations must target the resource group specified in `resourceGroup` only.
 - Reject operations that create resources in other resource groups or delete the configured resource group without explicit user confirmation.
 
-3. If restricted and the user requests a blocked operation, inform them: "Restricted mode is enabled. To allow this operation, set restrictedMode to false in azure-cursor.config.json, or adjust the scope/resourceGroup settings."
+4. If restricted and the user requests a blocked operation, inform them: "Restricted mode is enabled. To allow this operation, set restrictedMode to false in azure-cursor-community.config.json, or adjust the scope/resourceGroup settings."
 
-4. If no config file exists or `restrictedMode` is `false`, proceed normally.
+5. If delete is blocked by `restrictDeletesToCreatedByCursorAzure`, inform them: "Delete is restricted to resource groups tagged created-by-cursor-azure=true. The target resource group does not have that tag. Set restrictDeletesToCreatedByCursorAzure to false to allow deletes elsewhere."
+
+6. If no config file exists, proceed normally. Default `restrictDeletesToCreatedByCursorAzure` is false when not specified.

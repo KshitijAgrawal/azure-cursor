@@ -1,6 +1,6 @@
-# Azure Cursor Plugin
+# Azure Cursor Community Plugin
 
-A Cursor plugin to help developers integrate with Azure. It provides skills, rules, agents, and commands for ARM templates, Bicep, Azure Functions, App Service, Cosmos DB, CI/CD, and security best practices.
+A community Cursor plugin to help developers integrate with Azure. It provides skills, rules, agents, and commands for ARM templates, Bicep, Azure Functions, App Service, Cosmos DB, CI/CD, and security best practices.
 
 ## Features
 
@@ -43,18 +43,30 @@ A Cursor plugin to help developers integrate with Azure. It provides skills, rul
 
 You can restrict the plugin until you feel confident:
 
-1. Copy `azure-cursor.config.json.example` to `azure-cursor.config.json` or `.cursor/azure-cursor.json` in your project root.
+1. Copy `azure-cursor-community.config.json.example` to `azure-cursor-community.config.json` or `.cursor/azure-cursor-community.json` in your project root.
 2. Set `restrictedMode: true` and choose a scope:
    - **`readOnly`** – No create/update/delete. Only login, list, validate.
    - **`resourceGroup`** – All writes limited to the `resourceGroup` you specify (e.g., `rg-my-test`).
-3. When ready for full access, set `restrictedMode: false` or remove the config.
+3. Set **`restrictDeletesToCreatedByCursorAzure`** to `true` in the config to allow deletes only inside resource groups tagged `created-by-cursor-azure: "true"`. Prevents accidental deletion of non-plugin RGs.
+4. When ready for full access, set `restrictedMode: false` and `restrictDeletesToCreatedByCursorAzure: false` (or remove the config).
+
+## Default Tagging
+
+The plugin automatically adds the tag `created-by-cursor-azure: "true"` to all resources it creates that support tags. This includes:
+
+- Resource groups
+- Storage accounts, Key Vault, Cosmos DB
+- App Service, Function Apps, Static Web Apps
+- AKS clusters, and other taggable resources
+
+Use this tag to identify resources created or managed via the Azure Cursor plugin.
 
 ## Installation
 
 Install from the [Cursor Marketplace](https://cursor.com/marketplace) or add the plugin locally:
 
-1. Clone this repo
-2. In Cursor: **Settings** → **Plugins** → **Add plugin from folder** → select this directory
+1. Clone the repo: `git clone https://github.com/KshitijAgrawal/azure-cursor`
+2. In Cursor: **Settings** → **Plugins** → **Add plugin from folder** → select the `azure-cursor` directory
 
 ## Usage
 
@@ -202,8 +214,8 @@ azure-cursor/
 │   └── azure-login.md
 ├── docs/
 │   └── PLUGIN_PLAN.md
-├── azure-cursor.config.json.example
-├── azure-cursor.config.schema.json
+├── azure-cursor-community.config.json.example
+├── azure-cursor-community.config.schema.json
 └── README.md
 ```
 

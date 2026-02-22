@@ -18,3 +18,5 @@ Follow Microsoft-recommended naming patterns:
 - **App Service Plan**: `asp-<name>-<env>`
 
 Abbreviations: `rg`, `st`, `app`, `func`, `kv`, `cosmos`, `sql`, `asp`. Use `uniqueString(resourceGroup().id)` or similar when global uniqueness is required (e.g., storage accounts).
+
+**Default tag**: Add `created-by-cursor-azure: "true"` to all resources created by this plugin that support tags (resource groups, storage accounts, web apps, etc.).

@@ -12,6 +12,6 @@ When the user asks to generate Bicep or ARM for an Azure resource:
 3. **Include**:
    - Parameters for name, location, SKU, environment
    - Outputs for resource IDs or connection endpoints
-   - Tags (Environment, ManagedBy)
+   - Tags (Environment, ManagedBy, created-by-cursor-azure: 'true')
 4. **Follow** resource provider API versions from Azure docs (e.g., `@2022-09-01` for Web).
 5. **Reference** the ARM/Bicep skills in this plugin for structure and best practices.

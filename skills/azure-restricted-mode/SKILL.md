@@ -14,7 +14,7 @@ Restricted mode lets users safely try the plugin with limited impact:
 
 ## Configuration
 
-Create `azure-cursor.config.json` or `.cursor/azure-cursor.json` in the project root:
+Create `azure-cursor-community.config.json` or `.cursor/azure-cursor-community.json` in the project root:
 
 **Read-only mode** (no deployments, no resource creation):
 ```json
@@ -33,10 +33,19 @@ Create `azure-cursor.config.json` or `.cursor/azure-cursor.json` in the project 
 }
 ```
 
+**Restrict deletes to plugin-created RGs only**:
+```json
+{
+  "restrictDeletesToCreatedByCursorAzure": true
+}
+```
+When true, only allow deletes inside resource groups that have tag `created-by-cursor-azure: "true"`. Independent of restrictedMode.
+
 **Disable restrictions**:
 ```json
 {
-  "restrictedMode": false
+  "restrictedMode": false,
+  "restrictDeletesToCreatedByCursorAzure": false
 }
 ```
 
@@ -47,9 +56,14 @@ Create `azure-cursor.config.json` or `.cursor/azure-cursor.json` in the project 
 | readOnly | az login, az account show, az group list, az resource list, az bicep build, az deployment group validate | az group create/delete, az deployment group create, any create/update/delete |
 | resourceGroup | Writes only to the configured resource group | Writes to other resource groups |
 
+| restrictDeletesToCreatedByCursorAzure | Effect |
+|--------------------------------------|--------|
+| true | Deletes allowed only for RGs with tag created-by-cursor-azure=true |
+| false (default) | No delete restriction by tag |
+
 ## Setup
 
-1. Copy `azure-cursor.config.json.example` from the plugin to your project root.
-2. Rename to `azure-cursor.config.json`.
+1. Copy `azure-cursor-community.config.json.example` from the plugin to your project root.
+2. Rename to `azure-cursor-community.config.json`.
 3. Set `restrictedMode: true` and choose `scope`.
 4. When confident, set `restrictedMode: false` or remove the config.

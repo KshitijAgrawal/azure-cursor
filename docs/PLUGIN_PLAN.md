@@ -1,8 +1,8 @@
-# Azure Cursor Plugin – Planning Document
+# Azure Cursor Community Plugin – Planning Document
 
 ## Overview
 
-This Cursor plugin helps developers integrate with Azure by providing skills, rules, agents, and commands for the most-used Azure services and workflows.
+This community Cursor plugin helps developers integrate with Azure by providing skills, rules, agents, and commands for the most-used Azure services and workflows.
 
 ## Most Used Azure Functionalities (Prioritized)
 
@@ -63,9 +63,15 @@ This Cursor plugin helps developers integrate with Azure by providing skills, ru
 - **azure-security-best-practices** – Microsoft security patterns (secrets, identity, data, network)
 
 ### Rules
-- Azure naming conventions
+- Azure naming conventions (including default tag `created-by-cursor-azure: "true"`)
 - Security best practices (Key Vault, managed identity)
 - ARM/Bicep style and structure
+
+### Default Tagging
+- All resources created by the plugin receive `created-by-cursor-azure: "true"` when tags are supported
+
+### Delete Restriction
+- `restrictDeletesToCreatedByCursorAzure: true` – only allow deletes inside RGs tagged `created-by-cursor-azure: "true"`
 
 ### Agents
 - Azure deployment reviewer

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Azure Cursor Plugin Config",
-  "description": "Restrict the plugin to read-only or a specific resource group until you feel confident.",
+  "title": "Azure Cursor Community Plugin Config",
+  "description": "Restrict the plugin to read-only, a resource group, or limit deletes to plugin-created RGs.",
   "type": "object",
   "properties": {
     "restrictedMode": {
@@ -17,6 +17,11 @@
     "resourceGroup": {
       "type": ["string", "null"],
       "description": "Required when scope is resourceGroup. All write operations must target this resource group only."
+    },
+    "restrictDeletesToCreatedByCursorAzure": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, only allow deletes inside resource groups tagged created-by-cursor-azure=true."
     }
   },
   "required": ["restrictedMode"],

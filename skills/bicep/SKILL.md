@@ -24,6 +24,7 @@ param environment string = 'dev'
 param tags object = {
   Environment: environment
   ManagedBy: 'Bicep'
+  'created-by-cursor-azure': 'true'
 }
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
@@ -136,5 +137,5 @@ az deployment sub create --location eastus --template-file main.bicep
 1. **Prefer Bicep over ARM JSON** for new Azure-only IaC
 2. **Use modules** for reusable components (storage, networking, app services)
 3. **Parameterize** environment, SKU, and capacity
-4. **Add tags** to all resources (Environment, ManagedBy, Project)
+4. **Add tags** to all resources (Environment, ManagedBy, Project, created-by-cursor-azure: 'true')
 5. **Use existing** keyword to reference existing resources instead of creating duplicates

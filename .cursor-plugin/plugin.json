@@ -1,12 +1,15 @@
 {
-  "name": "azure-cursor",
+  "name": "azure-cursor-community",
   "version": "1.0.0",
-  "description": "Azure integration for Cursor: ARM/Bicep templates, Functions, App Service, DevOps, and Azure best practices",
+  "description": "Community plugin: Azure integration for Cursor – ARM/Bicep, Functions, App Service, DevOps, and Azure best practices",
   "author": {
-    "name": "Azure Cursor Contributors"
+    "name": "Kshitij Agrawal"
   },
+  "repository": "https://github.com/KshitijAgrawal/azure-cursor",
+  "homepage": "https://github.com/KshitijAgrawal/azure-cursor",
   "keywords": [
     "azure",
+    "community",
     "arm",
     "bicep",
     "infrastructure-as-code",
